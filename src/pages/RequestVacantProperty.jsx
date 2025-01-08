@@ -2,7 +2,7 @@ import React from 'react'
 import { GoChevronDown } from "react-icons/go";
 
 
-export default function Request() {
+export default function RequestVacantProperty() {
   return (
     <div className='flex flex-col justify-center items-center gap-6 p-12'>
       <p className='font-semibold text-2xl mb-4'>Solicitud de Predio Desocupado</p>
@@ -11,10 +11,10 @@ export default function Request() {
           <p className='text-xl font-medium'>Suscriptor y predio</p>
         </div>
         <div className='flex flex-col gap-2 px-8'>
-          <p><span className='font-semibold'>Cuenta: </span>1234</p>
+          <p><span className='font-semibold'>Matrícula: </span>1234</p>
           <p><span className='font-semibold'>Suscriptor: </span>1234</p>
           <p><span className='font-semibold'>Nombres: </span>Diana Carolina Zuñiga</p>  
-          <p><span className='font-semibold'>Dirección: </span>Carrera 4 # 2-23 Centro</p>
+          <p><span className='font-semibold'>Dirección: </span>Carrera 4 #2-23 Centro</p>
         </div>
       </section>
       <section className='w-[550px] h-[960px] bg-white border border-gray-300 rounded-lg py-4'>
