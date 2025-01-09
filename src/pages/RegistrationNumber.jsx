@@ -1,13 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-
+import { getPropertyById } from '../services/propertiesController';
+  
 
 export default function RegistrationNumber() {
+  const [registrationNumber, setRegistrationNumber] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handlesubmit = (e) => {
+  const handlesubmit = async (e) => {
     e.preventDefault();
-    navigate('/solicitud-predio-desocupado');
+    try {
+      const data = await getPropertyById(registrationNumber);
+      console.log(data);
+      if (data) {
+        navigate('/solicitud-predio-desocupado');
+      } else {
+        setError('No se encontró el predio con ese número de matrícula')
+      }
+    } catch (error) {
+      setError('Error al consultar la API.', error);
+    }
   }
 
   return (
@@ -22,9 +35,10 @@ export default function RegistrationNumber() {
             Para utilizar el sistema, ingrese el número de matrícula de su factura de pago.
           </p>
           <form className='flex flex-col items-center gap-6' onSubmit={handlesubmit}>
-            <input type="text" placeholder='Número de matrícula' className='w-64 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-300' />
-            <button className='bg-blue-600 hover:bg-blue-700 text-white w-24 py-2 px-4 rounded-md'>Ingresar</button>
+            <input type="text" id='registrationNumber' value={registrationNumber} onChange={(e) => setRegistrationNumber(e.target.value)} placeholder='Número de matrícula' className='w-64 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-300' />
+            <button type='submit' className='bg-blue-600 hover:bg-blue-700 text-white w-24 py-2 px-4 rounded-md'>Ingresar</button>
           </form>
+          {error && <p className='text-red-500'>{error}</p>}
         </div>
       </div>
     </div>
