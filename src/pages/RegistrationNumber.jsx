@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { getPropertyById } from '../services/propertiesController';
+import { getPropertyByNumberPlate } from '../services/propertiesController';
   
 
 export default function RegistrationNumber() {
@@ -11,7 +11,7 @@ export default function RegistrationNumber() {
   const handlesubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = await getPropertyById(registrationNumber);
+      const data = await getPropertyByNumberPlate(registrationNumber);
       console.log(data);
       if (data) {
         navigate('/solicitud-predio-desocupado');
@@ -19,7 +19,8 @@ export default function RegistrationNumber() {
         setError('No se encontró el predio con ese número de matrícula')
       }
     } catch (error) {
-      setError('Error al consultar la API.', error);
+      setError('Error al consultar la API.');
+      console.error('Error al consultar la API:', error);
     }
   }
 
