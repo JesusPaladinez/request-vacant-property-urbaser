@@ -1,8 +1,40 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { GoChevronDown } from "react-icons/go";
+import { useParams } from 'react-router-dom';
+import { getPropertyByNumberPlate } from '../services/propertiesController';
+import { getOwerById, getOwnerById } from '../services/ownersController';
 
 
 export default function RequestVacantProperty() {
+  const { numberPlate } = useParams();
+  const [propertyData, setPropertyData] = useState(null);
+  const [ownerData, setOwnerData] = useState(null);
+  const [cause, setCause] = useState('unoccupiedHouse');
+  const [meansResponse, setMeansResponse] = useState('whatsappResponse');
+
+  useEffect(() => {
+    const fetchPropertyAndOwnerData = async () => {
+      try {
+        if (numberPlate) {
+          const property = await getPropertyByNumberPlate(numberPlate);
+          setPropertyData(property);
+          console.log('Datos del predio: ', property);          
+
+          if (property && property._id) {
+            const owner = await getOwnerById(property._id);
+            setOwnerData(owner);
+            console.log('Datos del propietario: ', owner);
+            
+          }
+        }
+      } catch (error) {
+        console.error("Error al obtener los datos del predio y del propietario.", error);        
+      }
+    };
+
+    fetchPropertyAndOwnerData();
+  }, [numberPlate]);
+
   return (
     <div className='flex flex-col justify-center items-center gap-6 p-12'>
       <p className='font-semibold text-2xl mb-4'>Solicitud de Predio Desocupado</p>
@@ -10,12 +42,17 @@ export default function RequestVacantProperty() {
         <div className='flex justify-center items-center border-b pb-4'>
           <p className='text-xl font-medium'>Suscriptor y predio</p>
         </div>
-        <div className='flex flex-col gap-2 px-8'>
-          <p><span className='font-semibold'>Matrícula: </span>1234</p>
-          <p><span className='font-semibold'>Suscriptor: </span>1234</p>
-          <p><span className='font-semibold'>Nombres: </span>Diana Carolina Zuñiga</p>  
-          <p><span className='font-semibold'>Dirección: </span>Carrera 4 #2-23 Centro</p>
-        </div>
+        {propertyData ? (
+          <div className='flex flex-col gap-2 px-8'>
+            <p><span className='font-semibold'>Matrícula: </span>{propertyData.number_plate}</p>
+            <p><span className='font-semibold'>Suscriptor: </span>{propertyData.subscriber}</p>
+            <p><span className='font-semibold'>Nombres: </span>{propertyData.full_name}</p>
+            <p><span className='font-semibold'>Dirección: </span>{propertyData.address}</p>
+          </div>
+        ) : (
+          <p className='text-center'>Cargando datos...</p>
+        )}
+        
       </section>
       <section className='w-[550px] h-[960px] bg-white border border-gray-300 rounded-lg py-4'>
         <div className='flex justify-center items-center border-b pb-4'>
@@ -43,8 +80,7 @@ export default function RequestVacantProperty() {
             <div className='flex flex-col gap-2'>
               <label htmlFor="cause">Causa del predio desocupado: </label>
               <div className='relative w-60'>
-                <select id='cause' className='block w-full appearance-none py-1 px-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-300'>
-                  <option value="" disabled selected>Seleccione</option>
+                <select id='cause' value={cause} onChange={(e) => setCause(e.target.value)} className='block w-full appearance-none py-1 px-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-300'>
                   <option value="unoccupiedHouse">Casa desocupada</option>
                   <option value="unoccupiedApartment">Apartamento desocupado</option>
                   <option value="unoccupiedStudioApartment">Apartaestudio desocupado</option>
@@ -60,11 +96,11 @@ export default function RequestVacantProperty() {
             <div className='flex flex-col gap-1'>
               <p className='mb-2'>¿Por qué medio desea recibir la respuesta?</p>
               <div className='flex items-center mb-2'>
-                <input type="radio" id="whatsappResponse" name="options" value="whatsappResponse" className='mr-2' checked />
+                <input type="radio" id="whatsappResponse" name="options" value="whatsappResponse" className='mr-2' checked={meansResponse === 'whatsappResponse'} onChange={() => setMeansResponse('whatsappResponse')}/>
                 <label htmlFor="whatsappResponse">WhatsApp</label>
               </div>
               <div className='flex items-center'>
-                <input type="radio" id="emailResponse" name="options" value="emailResponse" className='mr-2' />
+                <input type="radio" id="emailResponse" name="options" value="emailResponse" className='mr-2' checked={meansResponse === 'emailResponse'} onChange={() => setMeansResponse('emailResponse')}/>
                 <label htmlFor="emailResponse">Correo electrónico</label>
               </div>
             </div>

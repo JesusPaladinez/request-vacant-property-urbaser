@@ -15,12 +15,9 @@ export default function RegistrationNumber() {
       console.log(data);
       if (data) {
         navigate('/solicitud-predio-desocupado');
-      } else {
-        setError('No se encontró el predio con ese número de matrícula')
-      }
+      } 
     } catch (error) {
-      setError('Error al consultar la API.');
-      console.error('Error al consultar la API:', error);
+      setError('Ingrese un número de matrícula correcto.');
     }
   }
 
@@ -37,9 +34,9 @@ export default function RegistrationNumber() {
           </p>
           <form className='flex flex-col items-center gap-6' onSubmit={handlesubmit}>
             <input type="text" id='registrationNumber' value={registrationNumber} onChange={(e) => setRegistrationNumber(e.target.value)} placeholder='Número de matrícula' className='w-64 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-300' />
+            {error && <p className='text-red-500 text-center text-sm'>{error}</p>}
             <button type='submit' className='bg-blue-600 hover:bg-blue-700 text-white w-24 py-2 px-4 rounded-md'>Ingresar</button>
           </form>
-          {error && <p className='text-red-500'>{error}</p>}
         </div>
       </div>
     </div>
