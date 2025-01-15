@@ -1,39 +1,38 @@
 import React, { useEffect, useState } from 'react'
 import { GoChevronDown } from "react-icons/go";
-import { useParams } from 'react-router-dom';
-import { getPropertyByNumberPlate } from '../services/propertiesController';
-import { getOwerById, getOwnerById } from '../services/ownersController';
+// import { useParams } from 'react-router-dom';
+// import { getPropertyByNumberPlate } from '../services/propertiesController';
+// import { getOwnerById } from '../services/ownersController';
 
 
 export default function RequestVacantProperty() {
-  const { numberPlate } = useParams();
-  const [propertyData, setPropertyData] = useState(null);
-  const [ownerData, setOwnerData] = useState(null);
+  // const { numberPlate } = useParams();
+  // const [propertyData, setPropertyData] = useState(null);
+  // const [ownerData, setOwnerData] = useState(null);
   const [cause, setCause] = useState('unoccupiedHouse');
   const [meansResponse, setMeansResponse] = useState('whatsappResponse');
 
-  useEffect(() => {
-    const fetchPropertyAndOwnerData = async () => {
-      try {
-        if (numberPlate) {
-          const property = await getPropertyByNumberPlate(numberPlate);
-          setPropertyData(property);
-          console.log('Datos del predio: ', property);          
+  // useEffect(() => {
+  //   const fetchPropertyAndOwnerData = async () => {
+  //     try {
+  //       if (numberPlate) {
+  //         const property = await getPropertyByNumberPlate(numberPlate);
+  //         setPropertyData(property);
+  //         console.log('Datos del predio: ', property);          
 
-          if (property && property._id) {
-            const owner = await getOwnerById(property._id);
-            setOwnerData(owner);
-            console.log('Datos del propietario: ', owner);
-            
-          }
-        }
-      } catch (error) {
-        console.error("Error al obtener los datos del predio y del propietario.", error);        
-      }
-    };
+  //         if (property && property._id) {
+  //           const owner = await getOwnerById(property._id);
+  //           setOwnerData(owner);
+  //           console.log('Datos del propietario: ', owner);            
+  //         }
+  //       }
+  //     } catch (error) {
+  //       console.error("Error al obtener los datos del predio y del propietario.", error);        
+  //     }
+  //   };
 
-    fetchPropertyAndOwnerData();
-  }, [numberPlate]);
+  //   fetchPropertyAndOwnerData();
+  // }, [numberPlate]);
 
   return (
     <div className='flex flex-col justify-center items-center gap-6 p-12'>
@@ -42,16 +41,17 @@ export default function RequestVacantProperty() {
         <div className='flex justify-center items-center border-b pb-4'>
           <p className='text-xl font-medium'>Suscriptor y predio</p>
         </div>
-        {propertyData ? (
-          <div className='flex flex-col gap-2 px-8'>
-            <p><span className='font-semibold'>Matrícula: </span>{propertyData.number_plate}</p>
-            <p><span className='font-semibold'>Suscriptor: </span>{propertyData.subscriber}</p>
-            <p><span className='font-semibold'>Nombres: </span>{propertyData.full_name}</p>
-            <p><span className='font-semibold'>Dirección: </span>{propertyData.address}</p>
-          </div>
+        {/* {propertyData && ownerData ? (
+          
         ) : (
           <p className='text-center'>Cargando datos...</p>
-        )}
+        )} */}
+        <div className='flex flex-col gap-2 px-8'>
+          <p><span className='font-semibold'>Matrícula: </span>1234</p>
+          <p><span className='font-semibold'>Suscriptor: </span>1234</p>
+          <p><span className='font-semibold'>Nombres: </span>Jesús Eduardo Paladinez Vargas</p>
+          <p><span className='font-semibold'>Dirección: </span>Cll 70N #8A-92</p>
+        </div>
         
       </section>
       <section className='w-[550px] h-[960px] bg-white border border-gray-300 rounded-lg py-4'>
