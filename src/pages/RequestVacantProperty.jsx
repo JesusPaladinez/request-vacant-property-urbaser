@@ -116,7 +116,7 @@ export default function RequestVacantProperty() {
             </div>
             
             <div className='flex justify-center'>
-              <button className='bg-blue-600 hover:bg-blue-700 text-white w-24 py-2 px-4 rounded-md'>Enviar</button>
+              <button className='bg-urbaser-1 hover:text-urbaser-2 text-white py-2 px-4 rounded-md'>Enviar</button>
             </div>
           </div>
         </form>
