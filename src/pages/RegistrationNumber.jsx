@@ -22,8 +22,8 @@ export default function RegistrationNumber() {
   }
 
   return (
-    <div className='flex flex-col justify-center items-center gap-10 min-h-screen'>
-      <p className='text-2xl font-semibold text-urbaser-1'>Bienvenido al sistema de autogestión</p>
+    <div className='flex-1 flex flex-col items-center gap-12 p-16'>
+      <p className='text-2xl font-semibold text-urbaser-1'>Bienvenido al Sistema de Autogestión</p>
       <div className='bg-white w-96 min-h-72 py-4 border border-gray-300 rounded-xl flex flex-col items-center px-6'>
         <div className='w-full border-b pt-1 pb-4'>
           <p className='text-center text-xl text-urbaser-1 font-semibold'>URBASER POPAYÁN</p>
