@@ -1,7 +1,24 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useEffect } from 'react-router-dom';
+import { getPropertyById } from '../services/propertiesController';
 
 export default function BillingHistory() {
+  
+
+  useEffect(() => {    
+    const fetchOwnerData = async () => {
+      try {
+        const owner = await getOwnerById('1234');
+      } catch (error) {
+        
+      }
+    }
+    
+    return () => {
+      
+    };
+  }, []);
+
     const navigate = useNavigate();
 
     const handleFinish = () => {

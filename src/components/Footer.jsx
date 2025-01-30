@@ -3,6 +3,7 @@ import { LuLink2 } from 'react-icons/lu';
 import { HiOutlineMail } from 'react-icons/hi';
 import { ImPhone } from 'react-icons/im';
 
+
 export default function Footer() {
   return (
     <footer className={`bg-urbaser-1 flex justify-around items-center p-4`}>

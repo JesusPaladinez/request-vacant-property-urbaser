@@ -11,9 +11,8 @@ export default function RegistrationNumber() {
   const handlesubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = await getPropertyByNumberPlate(registrationNumber);
-      console.log(data);
-      if (data) {
+      const property = await getPropertyByNumberPlate(registrationNumber);
+      if (property) {
         navigate('/historial-facturacion');
       } 
     } catch (error) {
