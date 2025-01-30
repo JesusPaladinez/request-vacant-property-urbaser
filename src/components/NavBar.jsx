@@ -5,7 +5,7 @@ import logoUrbaser from '../assets/logoUrbaserDark.svg';
 
 export default function NavBar() {
   return (
-    <nav className='bg-urbaser-1 px-8 py-8 pr-16 text-xl flex justify-between items-center gap-3'>
+    <nav className='bg-urbaser-1 px-8 py-8 pr-12 text-xl flex justify-between items-center gap-3'>
       <Link to='/'>
         <img src={logoUrbaser} className='h-8' />
       </Link>
