@@ -40,7 +40,7 @@ export default function BillingHistory() {
         <p><span className='font-medium'>Unidades comerciales: </span>0</p>
         <p><span className='font-medium'>Estrato: </span>1</p>
         <p><span className='font-medium'>Pago mensual de aseo: </span>14.500</p>
-        <p><span className='font-medium'>Predio desocupado: </span>No</p>
+        <p><span className='font-medium'>Predio desocupado: </span>Por 2 meses</p>
         <div className='flex justify-center' onClick={handleFinish}>
             <button className='bg-urbaser-1 px-4 py-2 rounded-md text-white hover:text-urbaser-2'>Finalizar</button>
         </div>
