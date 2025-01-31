@@ -1,20 +1,29 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { getPropertyByNumberPlate } from '../services/propertiesController';
-  
+
 
 export default function RegistrationNumber() {
   const [registrationNumber, setRegistrationNumber] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handlesubmit = async (e) => {
+  // const handlesubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const property = await getPropertyByNumberPlate(registrationNumber);
+  //     if (property) {
+  //       navigate('/historial-facturacion');
+  //     } 
+  //   } catch (error) {
+  //     setError('Ingrese un número de matrícula correcto.');
+  //   }
+  // }
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const property = await getPropertyByNumberPlate(registrationNumber);
-      if (property) {
-        navigate('/historial-facturacion');
-      } 
+      navigate('/historial-facturacion');
     } catch (error) {
       setError('Ingrese un número de matrícula correcto.');
     }
@@ -31,7 +40,7 @@ export default function RegistrationNumber() {
           <p className='text-center text-urbaser-1'>
             Para utilizar el sistema, ingrese el número de matrícula de su factura de pago.
           </p>
-          <form className='flex flex-col items-center gap-6' onSubmit={handlesubmit}>
+          <form className='flex flex-col items-center gap-6' onSubmit={handleSubmit}>
             <input type="text" id='registrationNumber' value={registrationNumber} onChange={(e) => setRegistrationNumber(e.target.value)} placeholder='Número de matrícula' className='w-64 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-300' />
             {error && <p className='text-red-500 text-center text-sm'>{error}</p>}
             <button type='submit' className='bg-urbaser-1 hover:text-urbaser-2 text-white w-24 py-2 px-4 rounded-md'>Ingresar</button>
