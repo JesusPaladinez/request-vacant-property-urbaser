@@ -7,7 +7,6 @@ import RequestVacantProperty from './pages/RequestVacantProperty';
 import BillingHistory from './pages/BillingHistory';
 import ImportantNote from './pages/ImportantNote';
 
-
 export default function App() {
 
   return (

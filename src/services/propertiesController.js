@@ -12,8 +12,8 @@ export const getPropertyByNumberPlate = async ( numberPlate ) => {
 
 export const getPropertyById = async ( propertyId ) => {
     try {
-        const property = await apiClient.get(`/properties/${propertyId}`);
-        return property.data;
+        const response = await apiClient.get(`/properties/${propertyId}`);
+        return response.data;
     } catch (error) {
         console.error("Error al obtener el predio por el ID.", error);
         throw error;

@@ -1,29 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { getPropertyByNumberPlate } from '../services/propertiesController';
-
+import { PropertiesContext } from '../context/PropertiesContext';
 
 export default function RegistrationNumber() {
   const [registrationNumber, setRegistrationNumber] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-
-  // const handlesubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const property = await getPropertyByNumberPlate(registrationNumber);
-  //     if (property) {
-  //       navigate('/historial-facturacion');
-  //     } 
-  //   } catch (error) {
-  //     setError('Ingrese un número de matrícula correcto.');
-  //   }
-  // }
+  const { setPropertyId } = useContext(PropertiesContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      navigate('/historial-facturacion');
+      const property = await getPropertyByNumberPlate(registrationNumber);
+      if (property) {
+        setPropertyId(property._id);
+        navigate('/historial-facturacion');
+      } 
     } catch (error) {
       setError('Ingrese un número de matrícula correcto.');
     }
