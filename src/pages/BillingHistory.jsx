@@ -37,14 +37,14 @@ export default function BillingHistory() {
   };
 
   return (
-    <div className='flex flex-col items-center justify-center gap-12 p-12 text-urbaser-1'>
+    <div className='flex flex-col items-center justify-center gap-10 p-14 text-urbaser-1'>
       <p className='font-semibold text-2xl'>Historial de facturación</p>
       <div className='bg-white border border-gray-300 rounded-lg w-[700px] h-[700px] flex flex-col gap-6 p-12'>
         {propertyData ? (
           <>
             <p><span className='font-medium'>Matrícula: </span>{propertyData.number_plate}</p>
             <p><span className='font-medium'>Suscriptor: </span>{propertyData.subscriber}</p>
-            <p><span className='font-medium'>Propietario: </span>{ownerData ? ownerData.full_name : "No tiene un propietario asociado."}</p>
+            <p><span className='font-medium'>Propietario: </span>{ownerData ? ownerData.full_name : "No tiene un propietario vínculado."}</p>
             <p><span className='font-medium'>Dirección: </span>{propertyData.address} {propertyData.neighborhood}</p>
             <p><span className='font-medium'>Barrido de calles: </span>2 veces por semana</p>
             <p><span className='font-medium'>Recolección residuos sólidos urbanos: </span>2 veces por semana</p>
